@@ -2,5 +2,5 @@
   "node": true,
   "strict": false,
   "esversion": 6,
-  "no-console": "error"
+  "no-console": "off"
 }
