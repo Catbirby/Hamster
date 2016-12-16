@@ -3,10 +3,10 @@
 const settings = require('./settings.json');
 const Eris = require('eris');
 const client = new Eris(settings.token);
-const commands = new (require("./commands/dispatcher.js"))();
+const commands = new (require('./commands/dispatcher.js'))();
 client.connect();
 client.on('ready', () => {
-    commands.register("info", new (require("./commands/info.js"))());
+    commands.register('info', new (require('./commands/info.js'))());
     console.log('Ready!');
 });
 
