@@ -26,3 +26,5 @@ client.on('messageCreate', (msg) => {
     }
     commands.process(command, msg, args);
 });
+
+module.exports = {client: client, commands: commands, settings: settings};
