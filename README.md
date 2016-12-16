@@ -1,2 +1,2 @@
 # Hamster
-A music bot for self hosting purposes, mad in node.js
+A music bot for self hosting purposes, made in node.js
