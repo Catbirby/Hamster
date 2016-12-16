@@ -1,0 +1,28 @@
+{
+  "name": "hampster",
+  "version": "1.0.0",
+  "description": "A music bot for self hosting purposes, made in node.js",
+  "main": "Index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lunar-Skies/Hamster.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "music",
+    "audio"
+  ],
+  "author": "ArsenArsen and Lunar-Skies",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lunar-Skies/Hamster/issues"
+  },
+  "homepage": "https://github.com/Lunar-Skies/Hamster#readme",
+  "dependencies": {
+    "eris": "^0.5.1"
+  }
+}
