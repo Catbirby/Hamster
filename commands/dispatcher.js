@@ -26,5 +26,9 @@ class Dispatcher {
             }
         }
     }
+
+    getCommands() {
+        return this.commands;
+    }
 }
 module.exports = Dispatcher;
