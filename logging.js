@@ -8,11 +8,13 @@ const out = log => {
     toFile(log);
 };
 console.log = log => {
-    log = `[LOG] ${log}`;
+    let d = new Date();
+    log = `[${d.toString()} LOG] ${log}`;
     out(log);
 };
 console.info = console.log;
 console.error = log => {
-    log = `[ERROR] ${log}`;
+    let d = new Date();
+    log = `[${d.toString()} ERROR] ${log}`;
     out(log);
 };
