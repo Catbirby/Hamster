@@ -1,7 +1,7 @@
 const fs = require('fs');
 const sysout = console.log;
 function toFile(log) {
-    fs.appendFile("./latest.log", log);
+    fs.appendFile("./latest.log", log, () => {});
 }
 const out = log => {
     sysout(log);
