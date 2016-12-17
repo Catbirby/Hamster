@@ -1,6 +1,7 @@
 'use strict';
 require('./logging.js');
 const settings = require('./settings.json');
+settings.prefix = settings.prefix || "ham.";
 const Eris = require('eris');
 const client = new Eris(settings.token);
 const commands = new (require('./commands/dispatcher.js'))();
