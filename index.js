@@ -1,5 +1,5 @@
 'use strict';
-
+require('./logging.js');
 const settings = require('./settings.json');
 const Eris = require('eris');
 const client = new Eris(settings.token);
