@@ -1,7 +1,8 @@
 "use strict";
 
+
 class Dispatcher {
-    constructor(){
+    constructor() {
         this.commands = new Map();
     }
 
@@ -13,15 +14,15 @@ class Dispatcher {
         return this.commands.get(name);
     }
 
-    has(name){
+    has(name) {
         return this.commands.has(name);
     }
 
-    process(name, msg, args){
-        if(this.has(name)){
+    process(name, msg, args) {
+        if (this.has(name)) {
             try {
                 this.get(name).process(msg, args);
-            } catch (e){
+            } catch (e) {
                 msg.channel.createMessage(`**There was an error running your command!**\n\`\`\`js\n${e.stack}\n\`\`\``);
             }
         }

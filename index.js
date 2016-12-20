@@ -1,11 +1,16 @@
 'use strict';
+
 require('./logging.js');
+
 const settings = require('./settings.json');
-settings.prefix = settings.prefix || "ham.";
 const Eris = require('eris');
 const client = new Eris(settings.token);
-const commands = new (require('./commands/dispatcher.js'))();
-client.connect();
+const Dispatcher = require('./commands/dispatcher.js');
+const commands = new Dispatcher();
+
+settings.prefix = settings.prefix || "ham.";
+
+
 client.on('ready', () => {
     commands.register('info', new (require('./commands/info.js'))());
     commands.register('help', new (require('./commands/help.js'))());
@@ -29,4 +34,6 @@ client.on('messageCreate', (msg) => {
     commands.process(command, msg, args);
 });
 
-module.exports = {client: client, commands: commands, settings: settings};
+module.exports = { client: client, commands: commands, settings: settings };
+
+client.connect();

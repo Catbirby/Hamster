@@ -1,5 +1,7 @@
 "use strict";
+
 const constants = require('./../index.js');
+
 class Help {
     process(msg, args){
         let help = '';
