@@ -19,20 +19,20 @@ const out = log => {
  * Sets `console.log`, `console.error` and `console.info`
  */
 const hook = () => {
-    toFile(logFile, ` --- NEW ${new Date()} NEW ---\n`);
+    toFile(logFile, `--- NEW ${new Date()} NEW ---\n\t`);
     console.log = log => {
         let d = new Date();
-        log = `[${d.toString()} LOG] ${log}`;
+        log = `[${d.toString()} LOG] ${log}\t`;
         out(log);
     };
     console.info = log => {
         let d = new Date();
-        log = `[${d.toString()} INFO] ${log}`;
+        log = `[${d.toString()} INFO] ${log}\t`;
         info(log);
     };
     console.error = log => {
         let d = new Date();
-        log = `[${d.toString()} ERROR] ${log}`;
+        log = `[${d.toString()} ERROR] ${log}\n\t`;
         out(log);
     };
 };
