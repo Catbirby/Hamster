@@ -14,14 +14,20 @@ settings.prefix = settings.prefix || "ham.";
 client.on('ready', () => {
     commands.register('info', new (require('./commands/info.js'))());
     commands.register('help', new (require('./commands/help.js'))());
+    commands.register('join', new (require('./commands/join.js'))());
+    commands.register('part', new (require('./commands/part.js'))());
     console.log('Ready!');
 });
 
 client.on('error', (err) => console.error(err));
 
 client.on('messageCreate', (msg) => {
-    if (!msg.channel.guild || !msg.content.startsWith(settings.prefix))
+    if (msg.author.bot || !msg.content.startsWith(settings.prefix))
         return;
+    if(!msg.channel.guild){
+        msg.channel.createMessage("I cannot be used in DM's.");
+        return;
+    }
     const content = msg.content;
     let command = content.substring(settings.prefix.length);
     if (command.length === 0)

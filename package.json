@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Lunar-Skies/Hamster#readme",
   "dependencies": {
-    "eris": "^0.5.1"
+    "eris": "^0.5.1",
+    "ytdl-core": "^0.7.21"
   }
 }
