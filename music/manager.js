@@ -24,27 +24,33 @@ class Manager {
         this.uid = uid;
         let dis = this;
         consts.client.joinVoiceChannel(dis.song.channel).then(conn => {
-            let stream = ytdl(this.song.url, {audioonly: true});
-            try {
-                consts.client.createMessage(dis.song.textChannel, `<@!${dis.song.requestedBy}> requested the song ${dis.song.info.title}!`);
-            } catch (err) {
-            }
-            conn.play(stream);
-            conn.on('end', () => {
-                if (dis.uid !== uid)
-                    return;
-                if (dis.songQueue.length < 1) {
-                    consts.client.leaveVoiceChannel(dis.song.channel);
-                } else
-                    dis.skip();
-            });
+            this.handle(dis, uid, conn);
         }, err => {
-            dis.skip();
+            console.log(err.stack);
+            if (consts.client.voiceConnections.get(this.guild))
+                this.handle(dis, uid, consts.client.voiceConnections.get(this.guild));
             try {
-                consts.client.createMessage(dis.song.textChannel, `<@!${dis.song.requestedBy}> could not join the channel! \`${err}\``);
+                consts.client.createMessage(dis.song.textChannel, `<@!${dis.song.requestedBy}> could not join the channel!`);
             }
             catch (_err) {
             }
+        });
+    }
+
+    handle(dis, uid, conn) {
+        let stream = ytdl(this.song.url, {audioonly: true});
+        try {
+            consts.client.createMessage(dis.song.textChannel, `<@!${dis.song.requestedBy}> requested the song ${dis.song.info.title}!`);
+        } catch (err) {
+        }
+        conn.play(stream);
+        conn.on('end', () => {
+            if (dis.uid !== uid)
+                return;
+            if (dis.songQueue.length < 1) {
+                consts.client.leaveVoiceChannel(dis.song.channel);
+            } else
+                dis.skip();
         });
     }
 

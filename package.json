@@ -25,6 +25,7 @@
   "dependencies": {
     "eris": "^0.5.1",
     "node-uuid": "^1.4.7",
-    "ytdl-core": "^0.7.21"
+    "ytdl-core": "^0.7.21",
+    "unirest": "^0.5.1"
   }
 }

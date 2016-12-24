@@ -7,6 +7,7 @@ const Eris = require('eris');
 const client = new Eris(settings.token);
 const Dispatcher = require('./commands/dispatcher.js');
 const commands = new Dispatcher();
+module.exports = {client: client, commands: commands, settings: settings};
 const music = require('./music/manager.js');
 const unirest = require('unirest');
 unirest.get("https://discordapp.com/api/oauth2/applications/@me")
@@ -48,6 +49,5 @@ client.on('guildDelete', (guild) => {
     music.destroy(guild.id);
 });
 
-module.exports = {client: client, commands: commands, settings: settings};
 
 client.connect();
