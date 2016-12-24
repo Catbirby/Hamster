@@ -30,7 +30,7 @@ class Manager {
             if (consts.client.voiceConnections.get(this.guild))
                 this.handle(dis, uid, consts.client.voiceConnections.get(this.guild));
             try {
-                consts.client.createMessage(dis.song.textChannel, `<@!${dis.song.requestedBy}> could not join the channel!`);
+                consts.client.createMessage(dis.song.textChannel, `<@!${dis.song.requestedBy}> could not join the channel!\nResuming in the same one I am in right now!`);
             }
             catch (_err) {
             }

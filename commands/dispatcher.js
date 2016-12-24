@@ -21,6 +21,7 @@ class Dispatcher {
     process(name, msg, args) {
         if (this.has(name)) {
             try {
+                console.log(`Dispatching command '${name}' with arguments [${args}]`);
                 this.get(name).process(msg, args);
             } catch (e) {
                 msg.channel.createMessage(`**There was an error running your command!**\n\`\`\`js\n${e.stack}\n\`\`\``);

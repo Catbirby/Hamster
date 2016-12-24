@@ -33,6 +33,13 @@ client.on('messageCreate', (msg) => {
         msg.channel.createMessage('I cannot be used in DM\'s.');
         return;
     }
+    let perms = msg.channel.permissionsOf(client.user.id);
+    if (!perms.json.sendMessages)
+        return;
+    if (!perms.json.embedLinks) {
+        msg.channel.createMessage('You must have `Embed Links` enabled!');
+        return;
+    }
     const content = msg.content;
     let command = content.substring(settings.prefix.length);
     if (command.length === 0)
@@ -45,9 +52,6 @@ client.on('messageCreate', (msg) => {
     commands.process(command, msg, args);
 });
 
-client.on('guildDelete', (guild) => {
-    music.destroy(guild.id);
-});
-
+client.on('guildDelete', (guild) => music.destroy(guild.id));
 
 client.connect();
