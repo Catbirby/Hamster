@@ -24,6 +24,7 @@ class Dispatcher {
                 this.get(name).process(msg, args);
             } catch (e) {
                 msg.channel.createMessage(`**There was an error running your command!**\n\`\`\`js\n${e.stack}\n\`\`\``);
+                console.error(e);
             }
         }
     }
