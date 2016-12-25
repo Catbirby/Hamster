@@ -12,15 +12,19 @@ class Manager {
         this.guild = gid;
     }
 
-    getSong() {
+    get getSong() {
         return this.song;
     }
 
     skip() {
+        let uid = uuid.v4();
+        if (consts.client.voiceConnections.get(this.guild)) {
+            this.uid = uid;
+            consts.client.voiceConnections.get(this.guild).stopPlaying();
+        }
         this.song = this.songQueue.shift();
         if (!this.song)
             return;
-        let uid = uuid.v4();
         this.uid = uid;
         let dis = this;
         consts.client.joinVoiceChannel(dis.song.channel).then(conn => {
@@ -45,11 +49,12 @@ class Manager {
         }
         conn.play(stream);
         conn.on('end', () => {
-            if (dis.uid !== uid)
-                return;
             if (dis.songQueue.length < 1) {
                 consts.client.leaveVoiceChannel(dis.song.channel);
-            } else
+            }
+            if (dis.uid !== uid)
+                return;
+            if (dis.songQueue.length >= 1)
                 dis.skip();
         });
     }

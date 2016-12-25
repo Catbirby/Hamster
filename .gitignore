@@ -39,3 +39,4 @@ jspm_packages
 # WebStorm IDE
 .idea/
 /settings.json
+/localStorage.json

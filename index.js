@@ -1,8 +1,35 @@
 'use strict';
+// Prepare global utils
+require('./utils/utils.js');
+// Prepare settings
+let settings_;
+try {
+    settings_ = require('./settings.json');
+} catch (err){
+    console.error("Could not load `settings.json`! Exiting...");
+    console.error(err.stack);
+    process.exit(1);
+}
+const settings = settings_;
+settings.prefix = settings.prefix || "ham.";
+settings.moderators = settings.moderators || [];
+if (!Array.isArray(settings.moderators)) {
+    settings.moderators = [];
+}
+// Required fields
+if(!settings.token || !settings.ownerid){
+    console.error('One or more of mandatory fields `ownerid` and `token` are unset in the `settings.json`! Exiting...');
+    process.exit(1);
+}
+// Prepare log
+const logging = require('./logging.js');
+if (settings.noLog) {
+    logging.setFile(undefined);
+}
+logging.hook();
+// Prepare localStorage
+global.localStorage = new (require('./localStorage.js'))('./localStorage.json');
 
-require('./logging.js');
-
-const settings = require('./settings.json');
 const Eris = require('eris');
 const client = new Eris(settings.token);
 const Dispatcher = require('./commands/dispatcher.js');
@@ -14,7 +41,6 @@ unirest.get("https://discordapp.com/api/oauth2/applications/@me")
     .headers({Authorization: `Bot ${settings.token}`, 'Content-Type': 'application/json'})
     .end(body => console.log(`Invite: https://discordapp.com/oauth2/authorize?client_id=${body.body.id}&scope=bot&permissions=120654848`));
 
-settings.prefix = settings.prefix || "ham.";
 
 client.on('ready', () => {
     commands.register('info', new (require('./commands/info.js'))());

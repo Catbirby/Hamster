@@ -11,6 +11,9 @@ class Queue extends Command {
             let json = channel.permissionsOf(consts.client.user.id).json;
             if (json.voiceConnect && json.voiceSpeak && json.voiceUseVAD) {
                 let url = args[0];
+                 if(url.includes('&')){
+                     url = 'https://www.youtube.com/watch?v=' + utils.getURLParams(url).v;
+                 }
                 try {
                     ytdl.getInfo(url, (err, info) => {
                         if (!err) {

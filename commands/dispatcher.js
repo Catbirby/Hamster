@@ -1,6 +1,5 @@
 "use strict";
 
-
 class Dispatcher {
     constructor() {
         this.commands = new Map();

@@ -2,5 +2,6 @@
   "node": true,
   "strict": false,
   "esversion": 6,
-  "no-console": "off"
+  "no-console": "off",
+  "W117": "off"
 }

@@ -2,13 +2,12 @@ const fs = require('fs');
 const sysout = console.log;
 const syserr = console.error;
 const info = console.info;
-const defaultLogFile = './latest.log';
-
-let logFile = defaultLogFile;
+let logFile = './latest.log';
 
 const toFile = log => {
-    fs.appendFile(logFile, log + '\n', () => {
-    });
+    if (logFile)
+        fs.appendFile(logFile, log + '\n', () => {
+        });
 };
 const out = log => {
     sysout(log);
@@ -46,11 +45,9 @@ const unhook = () => {
     console.info = info;
 };
 
-hook();
-
 module.exports = {
     sysout: sysout, toFile: toFile, out: out, setFile: (file) => {
         "use strict";
-        logFile = file | defaultLogFile;
+        logFile = file;
     }, hook: hook, unhook: unhook
 };
