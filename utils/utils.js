@@ -1,5 +1,5 @@
 // Damn generic name
-global.utils = {
+module.exports = {
     getURLParams: (url) => {
         "use strict";
         if(typeof(url) === 'string'){

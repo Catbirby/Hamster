@@ -2,18 +2,38 @@
 const manager = require('./../music/manager.js');
 const ytdl = require('ytdl-core');
 const Command = require('./command.js');
-const consts = require("../index.js");
+const consts = require('../index.js');
+const utils = require('../utils/utils.js');
 
 class Queue extends Command {
     process(msg, args) {
+        if ((args[0] || '').toLocaleLowerCase() === 'list') {
+            let queue = manager.get(msg.channel.guild.id).getQueue();
+            let embed = {title: 'Current Playlist:', type: 'rich', fields: []};
+            let current = '';
+            let number = 1;
+            let page = 1;
+            queue.forEach(v => {
+                let format = `${number++}. ${v.info.title}\n`;
+                if (current.length + format.length > 1023) {
+                    embed.fields.push({name: `Page ${page++}`, value: current, inline: false});
+                    current = '';
+                }
+                current += format;
+            });
+            msg.author.getDMChannel().then(channel => channel.createMessage({
+                embed: embed
+            })).catch(console.error);
+            return;
+        }
         let channel = msg.guild.channels.find(ch => ch.bitrate && ch.voiceMembers.map(m => m.user).includes(msg.author));
         if (channel) {
             let json = channel.permissionsOf(consts.client.user.id).json;
             if (json.voiceConnect && json.voiceSpeak && json.voiceUseVAD) {
                 let url = args[0];
-                 if(url.includes('&')){
-                     url = 'https://www.youtube.com/watch?v=' + utils.getURLParams(url).v;
-                 }
+                if (url.includes('&')) {
+                    url = 'https://www.youtube.com/watch?v=' + utils.getURLParams(url).v;
+                }
                 try {
                     ytdl.getInfo(url, (err, info) => {
                         if (!err) {
@@ -28,7 +48,7 @@ class Queue extends Command {
                             msg.channel.createMessage('Bad URL!');
                         }
                     });
-                } catch (err){
+                } catch (err) {
                     msg.channel.createMessage('Bad or missing URL!');
                 }
             } else msg.channel.createMessage("I do not have the permissions to join that channel!");
@@ -38,7 +58,7 @@ class Queue extends Command {
     }
 
     usage() {
-        return 'Queues a song. `queue <URL>`';
+        return 'Queues a song. `queue <URL>`. If instead of the <URL> you give it `list` it will list the curent queue.';
     }
 
     type() {

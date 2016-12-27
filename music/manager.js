@@ -78,6 +78,10 @@ class Manager {
             this.skip();
     }
 
+    getQueue() {
+        return this.songQueue;
+    }
+
     destroyNow() {
         this.uid = undefined;
         this.song = undefined;
