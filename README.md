@@ -14,7 +14,7 @@ Optional fields are `youtube-api` and `moderators`, and `noLog`.
 `moderators` is a JSON array of Discord IDs<sup>2</sup> of moderators. They get access to all commands but `eval` and `shutdown`. 
 Default, and in case of a type mismatch: `[]`
 
-There is one more field, a boolean, called `noLog`. It will disable `latest.log` if set to `true`. Defaults to `false`
+There is one more field, a Boolean, called `noLog`. It will disable `latest.log` if set to `true`. Defaults to `false`
 
 Example of the file:
 ```json
@@ -26,6 +26,11 @@ Example of the file:
   "noLog": false
 }
 ```
+## ffmpeg or avconv
+To run the bot it is required to have ffmpeg or avconv
+- avconv: `sudo apt-get install libav-tools`
+- ffmpeg: A guid to installing this can be found [here](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg)
+
 ## Music
 To give someone access to `queue` and `skip` and other music commands, either add their ID to the `moderators` field, or give them a role named `DJ`.
 
@@ -37,10 +42,10 @@ They will also get access to DJ commands even without the role.
 The bot will collect all the logs printed to console into a `latest.log` file. 
 Together with the timestamps and all that fancy.
 
-To disable set the `noLog` option to true in `settins.json`
+To disable set the `noLog` option to true in `settings.json`
 
 ### Addition
-1. Discord bot token can be obtained [here](https://discordapp.com/developers/docs/intro)
+1. Discord bot token can be obtained [here](HTTPS://discordapp.com/developers/docs/intro)
 2. Discord IDs can be obtained by enabling `Developers Mode` in `Appearance` under `User Settings`,
  and then right clicking a user and pressing `Copy ID`
 3. https://developers.google.com/youtube/v3/getting-started
