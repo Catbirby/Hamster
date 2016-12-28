@@ -29,7 +29,7 @@ Example of the file:
 ## ffmpeg or avconv
 To run the bot it is required to have ffmpeg or avconv
 - avconv: `sudo apt-get install libav-tools`
-- ffmpeg: A guid to installing this can be found [here](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg)
+- ffmpeg: A guide to installing this can be found [here](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg)
 
 ## Music
 To give someone access to `queue` and `skip` and other music commands, either add their ID to the `moderators` field, or give them a role named `DJ`.
