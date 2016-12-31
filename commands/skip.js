@@ -17,7 +17,7 @@ class Skip extends Command {
         return 'Skips the current song';
     }
 
-    type(){
+    type() {
         return 'music';
     }
 }
